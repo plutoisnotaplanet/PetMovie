@@ -1,4 +1,4 @@
-package com.example.petmovie
+package com.petmovie.petmovie
 
 import org.junit.Test
 

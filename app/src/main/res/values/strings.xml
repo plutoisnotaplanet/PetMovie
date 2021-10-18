@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">PetMovie</string>
+    <string name="movies_placeholder">Начните ввод в строку поиска</string>
+    <string name="error_unknown_on_download">Неизвестная ошибка при попытке загрузки списка фильмов</string>
+    <string name="search_error">Что-то пошло не так. Пожалуйста, проверьте подключение к интернету и попробуйте снова!</string>
+    <string name="empty_result">Нет результатов по вашему запросу</string>
+    <string name="content_cinema_poster">Постер фильма</string>
+    <string name="hint_search_query">Введите название фильма...</string>
+    <string name="search_icon">Иконка поиска</string>
 </resources>
