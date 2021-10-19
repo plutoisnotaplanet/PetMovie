@@ -9,7 +9,7 @@ abstract class MoviesViewModel: ViewModel() {
 
     abstract val queryChannel: SendChannel<String>
 
-    abstract val searchResult: LiveData<QueryResult>
+    abstract val searchResult: LiveData<MoviesResult>
     abstract val searchState: LiveData<SearchState>
 
     abstract fun onMovieAction(movie: Movie)
