@@ -15,10 +15,9 @@ import retrofit2.converter.gson.GsonConverterFactory
 class AppComponent(appContext: Context) {
 
     private val movieRepo: MoviesRepository
-    private val navigator: Navigator
+
 
     init {
-        navigator = Navigator(appContext)
 
         val api = Retrofit.Builder()
             .baseUrl(BuildConfig.BASE_URL)
@@ -30,7 +29,7 @@ class AppComponent(appContext: Context) {
     }
 
     internal fun getMoviesViewModel(fragment: Fragment) : MoviesViewModel {
-        return ViewModelProvider(fragment, MovieViewModelImpl.Factory(movieRepo, navigator))
+        return ViewModelProvider(fragment, MovieViewModelImpl.Factory(movieRepo))
             .get(MoviesViewModel::class.java)
     }
 

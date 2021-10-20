@@ -5,6 +5,7 @@ import com.petmovie.entity.Movie
 import com.petmovie.network.MoviesApi
 import com.example.petmovie.BuildConfig
 import com.petmovie.network.MovieNetworkModel
+import com.petmovie.network.asMovie
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.withContext
@@ -21,7 +22,8 @@ class MoviesRepository(private val moviesApi: MoviesApi) {
             .flowOn(Dispatchers.IO)
             .onEach { Log.d(MoviesRepository::class.java.name, it.movies.toString()) }
             .flatMapMerge { it.movies.asFlow() }
-            .map { Movie(it.id, it.title, getPosterUrl(it)) }
+            .map { Movie(it.id, it.title, getPosterUrl(it),
+                it.movieAgeRate, it.movieGenre, it.releasedDate, it.movieDescription, it.movieRate) }
             .toList()
 
     }
@@ -35,8 +37,15 @@ class MoviesRepository(private val moviesApi: MoviesApi) {
             .flowOn(Dispatchers.IO)
             .onEach { Log.d(MoviesRepository::class.java.name, it.movies.toString()) }
             .flatMapMerge { it.movies.asFlow() }
-            .map { Movie(it.id, it.title, getPosterUrl(it)) }
+            .map { Movie(it.id, it.title, getPosterUrl(it),
+                it.movieAgeRate, it.movieGenre, it.releasedDate, it.movieDescription, it.movieRate) }
             .toList()
+    }
+
+    internal suspend fun movieDetails(movieId: Int) : Movie {
+        return withContext(Dispatchers.IO) {
+                moviesApi.detailMovie(movieId, BuildConfig.API_KEY)
+        }.asMovie()
     }
 
     private fun getPosterUrl(it: MovieNetworkModel) = "${BuildConfig.BASE_IMAGE_URL}${it.posterPath}"

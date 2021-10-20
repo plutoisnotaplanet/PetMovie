@@ -9,7 +9,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.HorizontalScrollView
 import android.widget.Toast
+import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -67,10 +69,10 @@ class MoviesFragment : Fragment() {
                 }
             layoutManager = GridLayoutManager(activity, spanCount)
 
-            moviesAdapter = MoviesAdapter(viewModel::onMovieAction)
+            moviesAdapter = MoviesAdapter(true ,viewModel::onMovieAction)
             adapter = moviesAdapter
 
-            addItemDecoration(GridSpacingitemDecoration(spanCount, resources.getDimension(R.dimen.itemsDist).toInt(), true))
+            addItemDecoration(GridSpacingitemDecoration(spanCount, resources.getDimension(R.dimen.itemsDist).toInt(), true, true))
             addOnScrollListener(object : RecyclerView.OnScrollListener() {
                 override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                     super.onScrollStateChanged(recyclerView, newState)
@@ -89,10 +91,10 @@ class MoviesFragment : Fragment() {
                 }
             }
 
-            topMoviesAdapter = TopMoviesAdapter(viewModel::onMovieAction)
+            topMoviesAdapter = TopMoviesAdapter(false, viewModel::onMovieAction)
             adapter = topMoviesAdapter
 
-            addItemDecoration(GridSpacingitemDecoration(1, resources.getDimension(R.dimen.itemsDist).toInt(), true))
+            addItemDecoration(GridSpacingitemDecoration(1, resources.getDimension(R.dimen.horizontalItemsDist).toInt(), true, false))
             addOnScrollListener(object : RecyclerView.OnScrollListener() {
                 override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                     super.onScrollStateChanged(recyclerView, newState)
@@ -117,6 +119,13 @@ class MoviesFragment : Fragment() {
 //        viewModel.searchResult.observe(viewLifecycleOwner,::handleMoviesListResult)
 //        viewModel.searchState.observe(viewLifecycleOwner, ::handleLoadingState)
         viewModel.topMoviesResult.observe(viewLifecycleOwner,::handleTopMoviesListResult)
+        viewModel.navigateToDetailMovie.observe(viewLifecycleOwner, Observer {
+            if (null != it) {
+                this.findNavController().navigate(
+                    MoviesFragmentDirections.actionMovieFragmentToDetailFragment(it)
+                )
+            }
+        })
     }
 
     private fun handleTopMoviesListResult(result: MoviesResult) {
@@ -168,6 +177,10 @@ class MoviesFragment : Fragment() {
                 Toast.makeText(activity,R.string.error_unknown_on_download, Toast.LENGTH_SHORT).show()
             }
         }
+    }
+
+    private fun initAdapters() {
+
     }
 
 

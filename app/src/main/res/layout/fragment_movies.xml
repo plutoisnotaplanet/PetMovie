@@ -11,8 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="24sp"
+        style="@style/category_head"
         android:text="Лучшие фильмы"
-        android:textStyle="bold"
         app:layout_constraintTop_toBottomOf="@id/searchInput"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -29,6 +29,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/topMoviesText" />
+
 
 
     <androidx.recyclerview.widget.RecyclerView

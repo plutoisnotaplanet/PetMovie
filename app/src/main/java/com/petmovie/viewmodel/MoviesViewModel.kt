@@ -12,8 +12,13 @@ abstract class MoviesViewModel: ViewModel() {
 
     abstract val searchResult: LiveData<MoviesResult>
     abstract val searchState: LiveData<SearchState>
+
     abstract val _topMoviesResult: MutableLiveData<MoviesResult>
     abstract val topMoviesResult: LiveData<MoviesResult>
+
+    abstract val _navigateToDetailMovie:MutableLiveData<Movie>
+    abstract val navigateToDetailMovie: LiveData<Movie>
+
 
     abstract fun onMovieAction(movie: Movie)
 }

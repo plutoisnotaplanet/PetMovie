@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/movieFragment">
+
+    <fragment
+        android:id="@+id/movieFragment"
+        android:name="com.petmovie.view.MoviesFragment"
+        android:label="News App">
+        <action
+            android:id="@+id/action_movieFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
+    </fragment>
+    <dialog
+        android:id="@+id/detailFragment"
+        android:name="com.petmovie.view.BottomFragment"
+        android:label="Detail"
+        tools:layout="@layout/bottom_sheet_layout" >
+        <argument
+            android:name="movie"
+            app:argType="com.example.petmovie.entity.Movie" />
+    </dialog>
+</navigation>

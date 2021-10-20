@@ -8,13 +8,13 @@ import androidx.recyclerview.widget.ListAdapter
 import com.example.petmovie.databinding.ItemMovieBinding
 import com.petmovie.entity.Movie
 
-class TopMoviesAdapter(private val listener: (Movie) -> Unit) :
+class TopMoviesAdapter(private val needName: Boolean,private val listener: (Movie) -> Unit) :
 ListAdapter<Movie, MovieViewHolder>(DIFF_CALLBACK){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val binding = ItemMovieBinding.inflate(layoutInflater, parent, false)
-        return MovieViewHolder(binding)
+        return MovieViewHolder(needName, binding)
     }
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {

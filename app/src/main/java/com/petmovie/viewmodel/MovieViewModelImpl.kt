@@ -17,7 +17,12 @@ import kotlin.coroutines.coroutineContext
 
 private const val DEBOUNCE_DELAY_TIME_MS = 500L
 
-class MovieViewModelImpl( val moviesRepository: MoviesRepository, val navigator: Navigator) : MoviesViewModel() {
+class MovieViewModelImpl( val moviesRepository: MoviesRepository) : MoviesViewModel() {
+
+    override val _navigateToDetailMovie = MutableLiveData<Movie>()
+
+    override val navigateToDetailMovie: LiveData<Movie>
+        get() = _navigateToDetailMovie
 
     override val queryChannel = BroadcastChannel<String>(Channel.CONFLATED)
 
@@ -82,15 +87,17 @@ class MovieViewModelImpl( val moviesRepository: MoviesRepository, val navigator:
 
 
     override fun onMovieAction(movie: Movie) {
-        navigator.navigateTo("\"https://www.themoviedb.org/movie/${movie.id}")
+        viewModelScope.launch {
+            _navigateToDetailMovie.value = movie
+        }
     }
 
     @Suppress("UNCHEKED_CAST")
-    class Factory(private val repo: MoviesRepository, private val navigator: Navigator) :
+    class Factory(private val repo: MoviesRepository) :
             ViewModelProvider.NewInstanceFactory() {
 
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-            return MovieViewModelImpl(repo, navigator) as T
+            return MovieViewModelImpl(repo) as T
         }
             }
 }

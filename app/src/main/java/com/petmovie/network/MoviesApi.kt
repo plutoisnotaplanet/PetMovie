@@ -1,6 +1,7 @@
 package com.petmovie.network
 
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface MoviesApi {
@@ -17,4 +18,10 @@ interface MoviesApi {
         @Query("api_key") api_key: String,
         @Query("page") page: Int = 1
     ): SearchMovieResponse
+
+    @GET("movie/{movie_id}")
+    suspend fun detailMovie(
+        @Path("movie_id") movie_id: Int,
+        @Query("api_key") api_key: String,
+    ): MovieNetworkModel
 }

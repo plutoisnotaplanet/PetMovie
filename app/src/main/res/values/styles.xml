@@ -13,11 +13,35 @@
         <item name="android:paddingLeft">@dimen/space_small</item>
         <item name="android:paddingRight">@dimen/space_small</item>
         <item name="android:paddingTop">30dp</item>
+        <item name="android:fontFamily">@font/bebasneue_regular</item>
         <item name="android:paddingBottom">8dp</item>
         <item name="android:textAllCaps">true</item>
         <item name="android:textColor">@color/colorTitles</item>
         <item name="android:textSize">15sp</item>
         <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="movie_detail_name">
+        <item name="android:gravity">left</item>
+        <item name="android:paddingLeft">@dimen/space_small</item>
+        <item name="android:paddingRight">@dimen/space_small</item>
+        <item name="android:paddingTop">30dp</item>
+        <item name="android:fontFamily">@font/bebasneue_regular</item>
+        <item name="android:textColor">@color/colorTitles</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="movie_detail_little">
+        <item name="android:gravity">left</item>
+        <item name="android:paddingLeft">@dimen/space_small</item>
+        <item name="android:paddingRight">@dimen/space_small</item>
+        <item name="android:paddingTop">8dp</item>
+        <item name="android:fontFamily">@font/bebasneue_regular</item>
+        <item name="android:paddingBottom">8dp</item>
+        <item name="android:textColor">@color/colorTitles</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">normal</item>
     </style>
 
     <style name="SearchStyle">
@@ -29,5 +53,27 @@
         <item name="android:hint">@string/hint_search_query</item>
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">@android:color/black</item>
+    </style>
+
+    <style name="category_head">
+        <item name="android:textColor">@color/colorTitles</item>
+        <item name="android:textSize">25sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="font">@font/bebasneue_regular</item>
+        <item name="android:paddingLeft">@dimen/space_normal</item>
+        <item name="android:paddingRight">@dimen/space_small</item>
+        <item name="android:gravity">left</item>
+    </style>
+
+
+
+    <style name="AppBottomSheetDialogTheme"
+        parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/AppModalStyle</item>
+    </style>
+
+    <style name="AppModalStyle"
+        parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/bottom_sheet_background</item>
     </style>
 </resources>

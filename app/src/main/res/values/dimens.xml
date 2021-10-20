@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="space_normal">16dp</dimen>
+    <dimen name="space_weird">18dp</dimen>
     <dimen name="space_big">32dp</dimen>
     <dimen name="space_huge">48dp</dimen>
     <dimen name="space_small">4dp</dimen>
     <dimen name="cornerRad">6dp</dimen>
     <dimen name="itemsDist">19dp</dimen>
+    <dimen name="horizontalItemsDist">8dp</dimen>
     <dimen name="imageSize">150dp</dimen>
 </resources>
