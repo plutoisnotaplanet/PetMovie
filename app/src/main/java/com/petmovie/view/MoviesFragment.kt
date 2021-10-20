@@ -7,9 +7,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.HorizontalScrollView
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.petmovie.R
 import com.example.petmovie.databinding.FragmentMoviesBinding
@@ -34,6 +36,7 @@ class MoviesFragment : Fragment() {
 
     private lateinit var moviesAdapter: MoviesAdapter
     private lateinit var viewModel: MoviesViewModel
+    private lateinit var topMoviesAdapter: TopMoviesAdapter
 
 
 
@@ -78,6 +81,28 @@ class MoviesFragment : Fragment() {
             } )
         }
 
+        binding.topMovies.apply {
+            layoutManager = object : GridLayoutManager(activity, 1, GridLayoutManager.HORIZONTAL, false) {
+                override fun checkLayoutParams(lp: RecyclerView.LayoutParams?): Boolean {
+                    lp?.width = width/4
+                    return true
+                }
+            }
+
+            topMoviesAdapter = TopMoviesAdapter(viewModel::onMovieAction)
+            adapter = topMoviesAdapter
+
+            addItemDecoration(GridSpacingitemDecoration(1, resources.getDimension(R.dimen.itemsDist).toInt(), true))
+            addOnScrollListener(object : RecyclerView.OnScrollListener() {
+                override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                    super.onScrollStateChanged(recyclerView, newState)
+                    if (newState == RecyclerView.SCROLL_STATE_DRAGGING) {
+                        recyclerView.hideKeyboard()
+                    }
+                }
+            } )
+        }
+
         if (savedInstanceState == null) {
             lifecycleScope.launch {
                 viewModel.queryChannel.send("")
@@ -89,8 +114,19 @@ class MoviesFragment : Fragment() {
             }
         }
 
-        viewModel.searchResult.observe(viewLifecycleOwner,::handleMoviesListResult)
-        viewModel.searchState.observe(viewLifecycleOwner, ::handleLoadingState)
+//        viewModel.searchResult.observe(viewLifecycleOwner,::handleMoviesListResult)
+//        viewModel.searchState.observe(viewLifecycleOwner, ::handleLoadingState)
+        viewModel.topMoviesResult.observe(viewLifecycleOwner,::handleTopMoviesListResult)
+    }
+
+    private fun handleTopMoviesListResult(result: MoviesResult) {
+        when (result) {
+            is ValidResult -> {
+                binding.moviesList.visibility = View.GONE
+                binding.topMovies.visibility = View.VISIBLE
+                topMoviesAdapter.submitList(result.result)
+            }
+        }
     }
 
     private fun handleLoadingState(state: SearchState) {
@@ -109,28 +145,23 @@ class MoviesFragment : Fragment() {
     private fun handleMoviesListResult(result: MoviesResult) {
         when (result) {
             is ValidResult -> {
-                binding.moviesPlaceholder.visibility = View.GONE
                 binding.moviesList.visibility = View.VISIBLE
+                binding.topMovies.visibility = View.GONE
                 moviesAdapter.submitList(result.result)
             }
             is ErrorResult -> {
                 moviesAdapter.submitList(emptyList())
-                binding.moviesPlaceholder.visibility = View.GONE
                 binding.moviesList.visibility = View.GONE
-                binding.moviesPlaceholder.setText(R.string.search_error)
                 Log.e(MoviesFragment::class.java.name, "Something went wrong.", result.e)
             }
             is EmptyResult -> {
                 moviesAdapter.submitList(emptyList())
-                binding.moviesPlaceholder.visibility = View.VISIBLE
                 binding.moviesList.visibility = View.GONE
-                binding.moviesPlaceholder.setText(R.string.empty_result)
             }
             is EmptyQuery -> {
                 moviesAdapter.submitList(emptyList())
-                binding.moviesPlaceholder.visibility = View.VISIBLE
                 binding.moviesList.visibility = View.GONE
-                binding.moviesPlaceholder.setText(R.string.movies_placeholder)
+                binding.topMovies.visibility = View.VISIBLE
             }
             is TerminalError -> {
                 println("Our Flow terminated! JUST RUN!")
@@ -138,6 +169,7 @@ class MoviesFragment : Fragment() {
             }
         }
     }
+
 
     override fun onDestroyView() {
         super.onDestroyView()

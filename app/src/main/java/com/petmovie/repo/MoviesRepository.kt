@@ -26,5 +26,18 @@ class MoviesRepository(private val moviesApi: MoviesApi) {
 
     }
 
+    internal suspend fun topMovies(page: Int = 1) : List<Movie> {
+        return withContext(Dispatchers.IO) {
+            flowOf(
+                moviesApi.topMovie(BuildConfig.API_KEY,page)
+            )
+        }
+            .flowOn(Dispatchers.IO)
+            .onEach { Log.d(MoviesRepository::class.java.name, it.movies.toString()) }
+            .flatMapMerge { it.movies.asFlow() }
+            .map { Movie(it.id, it.title, getPosterUrl(it)) }
+            .toList()
+    }
+
     private fun getPosterUrl(it: MovieNetworkModel) = "${BuildConfig.BASE_IMAGE_URL}${it.posterPath}"
 }

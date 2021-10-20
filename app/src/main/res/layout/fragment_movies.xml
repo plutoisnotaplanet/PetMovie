@@ -6,19 +6,43 @@
     android:background="@color/colorBackground"
     tools:context="com.petmovie.view.MoviesFragment">
 
+    <TextView
+        android:id="@+id/topMoviesText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:text="Лучшие фильмы"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/searchInput"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/topMovies"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/topMovies"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:clipToPadding="false"
+        android:orientation="horizontal"
+        android:paddingHorizontal="6dp"
+        android:paddingTop="@dimen/space_small"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/topMoviesText" />
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/moviesList"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="64dp"
         android:clipToPadding="false"
         android:paddingHorizontal="19dp"
+        android:layout_marginTop="64dp"
         android:paddingTop="@dimen/space_big"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@+id/topMovies"/>
 
     <EditText
         android:id="@+id/searchInput"
@@ -52,18 +76,6 @@
         app:layout_constraintRight_toRightOf="@id/searchInput"
         app:layout_constraintTop_toTopOf="@id/searchInput"/>
 
-    <TextView
-        android:id="@+id/moviesPlaceholder"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/space_normal"
-        android:gravity="center"
-        android:text="@string/movies_placeholder"
-        android:textColor="@color/textColorPrimary"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

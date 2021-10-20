@@ -11,4 +11,10 @@ interface MoviesApi {
         @Query("query") query: String,
         @Query("page") page: Int = 1
     ): SearchMovieResponse
+
+    @GET("movie/top_rated")
+    suspend fun topMovie(
+        @Query("api_key") api_key: String,
+        @Query("page") page: Int = 1
+    ): SearchMovieResponse
 }
