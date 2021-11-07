@@ -16,9 +16,13 @@ abstract class MoviesViewModel: ViewModel() {
     abstract val _topMoviesResult: MutableLiveData<MoviesResult>
     abstract val topMoviesResult: LiveData<MoviesResult>
 
-    abstract val _navigateToDetailMovie:MutableLiveData<Movie>
-    abstract val navigateToDetailMovie: LiveData<Movie>
+    abstract var _movieForBottom: MutableLiveData<Movie>
+    abstract val movieForBottom: LiveData<Movie>
 
+    abstract var _similarMovies: MutableLiveData<List<Movie>>
+    abstract val similarMovies: LiveData<List<Movie>>
 
     abstract fun onMovieAction(movie: Movie)
+
+    abstract fun bottomRecyclerViewDownload(movie: Movie)
 }

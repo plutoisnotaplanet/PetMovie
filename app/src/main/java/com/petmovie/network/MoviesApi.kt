@@ -24,4 +24,11 @@ interface MoviesApi {
         @Path("movie_id") movie_id: Int,
         @Query("api_key") api_key: String,
     ): MovieNetworkModel
+
+    @GET("movie/{movie_id}/similar")
+    suspend fun similarMovie(
+        @Path("movie_id") movie_id: Int,
+        @Query("api_key") api_key: String,
+        @Query("page") page: Int = 1
+    ) : SearchMovieResponse
 }

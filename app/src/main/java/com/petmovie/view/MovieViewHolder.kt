@@ -11,8 +11,8 @@ import com.petmovie.entity.Movie
 import com.squareup.picasso.Picasso
 import jp.wasabeef.picasso.transformations.RoundedCornersTransformation
 
-class MovieViewHolder(private val needName: Boolean,private val binding: ItemMovieBinding) :
-RecyclerView.ViewHolder(binding.root) {
+class MovieViewHolder(private val needName: Boolean, private val binding: ItemMovieBinding) :
+    RecyclerView.ViewHolder(binding.root) {
 
     val transformation: com.squareup.picasso.Transformation
 
@@ -22,18 +22,16 @@ RecyclerView.ViewHolder(binding.root) {
         transformation = RoundedCornersTransformation(cornerRadius, 0)
     }
 
-    fun bind(movie: Movie, listener: (Movie) -> Unit) {
+    fun bind(movie: Movie) {
         if (needName) {
             setName(movie)
             setThumbnail(movie)
-            setClickListener(listener, movie)
         } else {
             binding.movieName.visibility = View.GONE
             binding.movieThumbnail.updateLayoutParams<ConstraintLayout.LayoutParams> {
                 dimensionRatio = "H, 3:4"
             }
             setThumbnail(movie)
-            setClickListener(listener, movie)
         }
 
     }
@@ -53,10 +51,4 @@ RecyclerView.ViewHolder(binding.root) {
             .into(binding.movieThumbnail)
     }
 
-    private fun setClickListener(
-        listener: (Movie) -> Unit,
-        movie: Movie
-    ) {
-        itemView.setOnClickListener { listener(movie) }
-    }
 }

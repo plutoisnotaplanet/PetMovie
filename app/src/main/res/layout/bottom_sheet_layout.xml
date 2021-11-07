@@ -1,156 +1,189 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    app:layout_behavior=""
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.view.BottomSheetFragment">
 
-    <LinearLayout
-        android:id="@+id/layout_top"
+    <data>
+
+        <variable
+            name="click"
+            type="com.petmovie.view.BottomSheetFragment.MyHandler" />
+
+    </data>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="120dp"
-        android:orientation="horizontal"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/movie_thumbnail"
-            android:layout_width="100dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            android:layout_height="match_parent"
-            android:importantForAccessibility="no"
-            app:srcCompat="@drawable/ic_launcher_foreground"
-            app:tint="#32CD32" />
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
+        <LinearLayout
+            android:id="@+id/layout_top"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="120dp"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/movie_thumbnail"
+                android:layout_width="100dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:onClick="@{click::onClose}"
+                android:layout_marginBottom="8dp"
+                android:layout_height="match_parent"
+                android:importantForAccessibility="no"/>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/movieName"
+                    android:layout_width="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/movieYear"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/bebasneue_regular"
+                    style="@style/movie_detail_name"
+                    android:gravity="left"
+                    android:paddingTop="8dp"
+                    android:text="The Witcher 3: Bloodraven"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/movieYear"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/movieName"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:text="2017"
+                    android:paddingEnd="24dp"
+                    style="@style/movie_detail_little"
+                    android:textSize="16sp" />
+
+
+                <TextView
+                    android:id="@+id/movieRate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/movie_detail_little"
+                    android:paddingEnd="24dp"
+                    app:layout_constraintStart_toEndOf="@id/movieYear"
+                    app:layout_constraintTop_toBottomOf="@id/movieName"
+                    android:text="7.5" />
+
+                <TextView
+                    android:id="@+id/movieBudget"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/movie_detail_little"
+                    android:paddingEnd="24dp"
+                    app:layout_constraintStart_toEndOf="@id/movieRate"
+                    app:layout_constraintTop_toBottomOf="@id/movieName"
+                    android:text="18+" />
+
+
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_collapsed"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/layout_top">
 
             <TextView
-                android:id="@+id/movieName"
-                android:layout_width="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toTopOf="@id/movieYear"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/bebasneue_regular"
-                style="@style/movie_detail_name"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
                 android:gravity="left"
-                android:paddingTop="8dp"
-                android:text="The Witcher 3: Bloodraven"
+                android:layout_marginStart="8dp"
+                android:fontFamily="@font/bebasneue_regular"
+                android:text="Description"
                 android:textSize="20sp" />
 
             <TextView
-                android:id="@+id/movieYear"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/movieName"
-                app:layout_constraintStart_toStartOf="parent"
-                android:text="2017"
-                android:paddingEnd="24dp"
-                style="@style/movie_detail_little"
+                android:id="@+id/movie_description"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:gravity="left"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:text="Some element, for example RecyclerView"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_expanded"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="invisible"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/layout_top">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:gravity="left"
+                android:layout_marginStart="8dp"
+                android:fontFamily="@font/bebasneue_regular"
+                android:text="Description"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/movie_description_again"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:gravity="left"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:text="Some element, for example RecyclerView"
                 android:textSize="16sp" />
 
             <TextView
-                android:id="@+id/movieAgeRate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                style="@style/movie_detail_little"
-                android:paddingEnd="24dp"
-                app:layout_constraintStart_toEndOf="@id/movieYear"
-                app:layout_constraintTop_toBottomOf="@id/movieName"
-                android:text="18+" />
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:gravity="left"
+                android:layout_marginStart="8dp"
+                android:fontFamily="@font/bebasneue_regular"
+                android:text="Related Movies"
+                android:textSize="20sp"
+                />
 
-            <TextView
-                android:id="@+id/movieRate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                style="@style/movie_detail_little"
-                android:paddingEnd="24dp"
-                app:layout_constraintStart_toEndOf="@id/movieAgeRate"
-                app:layout_constraintTop_toBottomOf="@id/movieName"
-                android:text="7.5" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/relatedMovies"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToPadding="false"
+                android:layout_gravity="bottom"
+                android:orientation="horizontal"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:paddingTop="@dimen/space_small"/>
 
+        </LinearLayout>
 
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
-    </LinearLayout>
-
-    <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/layout_collapsed"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/layout_top">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:gravity="left"
-            android:layout_marginStart="8dp"
-            android:fontFamily="@font/bebasneue_regular"
-            android:text="Description"
-            android:textSize="20sp" />
-
-        <TextView
-            android:id="@+id/movie_description"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:gravity="left"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            android:text="Some element, for example RecyclerView"
-            android:textSize="16sp" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/layout_expanded"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:visibility="invisible"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/layout_top">
-
-        <include layout="@layout/movie_description"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:gravity="left"
-            android:layout_marginStart="8dp"
-            android:fontFamily="@font/bebasneue_regular"
-            android:text="Related Movies"
-            android:textSize="20sp"
-            />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/relatedMovies"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:clipToPadding="false"
-            android:layout_gravity="bottom"
-            android:orientation="horizontal"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            android:paddingTop="@dimen/space_small"/>
-
-    </LinearLayout>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -1,6 +1,7 @@
 package com.petmovie.view
 
 import android.graphics.Rect
+import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 
@@ -29,6 +30,7 @@ class GridSpacingitemDecoration(private val spanCount: Int, private val spacing:
              else -> {
                  if (includeEdge) {
                      outRect.left = spacing
+                     Log.e("include edge", "${outRect.left}")
 //                     outRect.right = column * spacing
                  }
                  else {

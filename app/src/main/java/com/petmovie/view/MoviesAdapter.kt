@@ -7,8 +7,8 @@ import com.petmovie.entity.Movie
 import androidx.recyclerview.widget.ListAdapter
 import com.example.petmovie.databinding.ItemMovieBinding
 
-class MoviesAdapter(private val needName: Boolean, private val listener: (Movie) -> Unit) :
-ListAdapter<Movie, MovieViewHolder>(DIFF_CALLBACK){
+class MoviesAdapter(private val needName: Boolean, private val onClickListener: MoviesFragment.onClickListener) :
+    ListAdapter<Movie, MovieViewHolder>(DIFF_CALLBACK){
 
 
 
@@ -19,7 +19,10 @@ ListAdapter<Movie, MovieViewHolder>(DIFF_CALLBACK){
     }
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
-        holder.bind(getItem(position), listener)
+        holder.bind(getItem(position))
+        holder.itemView.setOnClickListener {
+            onClickListener.onClick(getItem(position))
+        }
     }
 
     companion object {

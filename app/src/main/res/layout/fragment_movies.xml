@@ -1,82 +1,90 @@
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/colorBackground"
-    tools:context="com.petmovie.view.MoviesFragment">
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
 
-    <TextView
-        android:id="@+id/topMoviesText"
+
+    </data>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="24sp"
-        style="@style/category_head"
-        android:text="Лучшие фильмы"
-        app:layout_constraintTop_toBottomOf="@id/searchInput"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/topMovies"/>
+        android:layout_height="match_parent"
+        android:background="@color/colorBackground"
+        tools:context="com.petmovie.view.MoviesFragment">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/topMovies"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:clipToPadding="false"
-        android:orientation="horizontal"
-        android:paddingHorizontal="6dp"
-        android:paddingTop="@dimen/space_small"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/topMoviesText" />
+        <TextView
+            android:id="@+id/topMoviesText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="24sp"
+            android:text="Лучшие фильмы"
+            style="@style/category_head"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/searchInput"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/topMovies"/>
 
-
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/moviesList"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:clipToPadding="false"
-        android:paddingHorizontal="19dp"
-        android:layout_marginTop="64dp"
-        android:paddingTop="@dimen/space_big"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/topMovies"/>
-
-    <EditText
-        android:id="@+id/searchInput"
-        style="@style/SearchStyle"
-        android:layout_width="0dp"
-        android:layout_height="72dp"
-        android:layout_marginTop="@dimen/space_normal"
-        android:importantForAutofill="no"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
-
-    <ImageView
-        android:id="@+id/searchIcon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="18dp"
-        android:layout_marginEnd="@dimen/space_big"
-        android:contentDescription="@string/search_icon"
-        android:src="@drawable/ic_search_grey_16"
-        app:layout_constraintRight_toRightOf="@id/searchInput"
-        app:layout_constraintTop_toTopOf="@id/searchInput"/>
-
-    <ProgressBar
-        android:id="@+id/searchProgress"
-        android:layout_width="22dp"
-        android:layout_height="22dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="@dimen/space_big"
-        android:indeterminate="true"
-        app:layout_constraintRight_toRightOf="@id/searchInput"
-        app:layout_constraintTop_toTopOf="@id/searchInput"/>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/topMovies"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:clipToPadding="false"
+            android:orientation="horizontal"
+            android:paddingHorizontal="6dp"
+            android:paddingTop="@dimen/space_small"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/topMoviesText" />
 
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/moviesList"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:clipToPadding="false"
+            android:paddingHorizontal="19dp"
+            android:layout_marginTop="64dp"
+            android:paddingTop="@dimen/space_big"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/topMovies"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <EditText
+            android:id="@+id/searchInput"
+            style="@style/SearchStyle"
+            android:layout_width="0dp"
+            android:layout_height="72dp"
+            android:layout_marginTop="@dimen/space_normal"
+            android:importantForAutofill="no"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <ImageView
+            android:id="@+id/searchIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:layout_marginEnd="@dimen/space_big"
+            android:contentDescription="@string/search_icon"
+            android:src="@drawable/ic_search_grey_16"
+            app:layout_constraintRight_toRightOf="@id/searchInput"
+            app:layout_constraintTop_toTopOf="@id/searchInput"/>
+
+        <ProgressBar
+            android:id="@+id/searchProgress"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="@dimen/space_big"
+            android:indeterminate="true"
+            app:layout_constraintRight_toRightOf="@id/searchInput"
+            app:layout_constraintTop_toTopOf="@id/searchInput"/>
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

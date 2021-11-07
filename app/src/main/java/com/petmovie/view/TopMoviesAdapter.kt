@@ -8,8 +8,8 @@ import androidx.recyclerview.widget.ListAdapter
 import com.example.petmovie.databinding.ItemMovieBinding
 import com.petmovie.entity.Movie
 
-class TopMoviesAdapter(private val needName: Boolean,private val listener: (Movie) -> Unit) :
-ListAdapter<Movie, MovieViewHolder>(DIFF_CALLBACK){
+class TopMoviesAdapter(private val needName: Boolean, private val onClickListener: MoviesFragment.onClickListener) :
+    ListAdapter<Movie, MovieViewHolder>(DIFF_CALLBACK){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -18,8 +18,12 @@ ListAdapter<Movie, MovieViewHolder>(DIFF_CALLBACK){
     }
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
-        holder.bind(getItem(position), listener)
+        holder.bind(getItem(position))
+        holder.itemView.setOnClickListener {
+            onClickListener.onClick(getItem(position))
+        }
     }
+
 
     companion object {
         private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<Movie>() {

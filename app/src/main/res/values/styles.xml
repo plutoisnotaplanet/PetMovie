@@ -13,12 +13,22 @@
         <item name="android:paddingLeft">@dimen/space_small</item>
         <item name="android:paddingRight">@dimen/space_small</item>
         <item name="android:paddingTop">30dp</item>
-        <item name="android:fontFamily">@font/bebasneue_regular</item>
         <item name="android:paddingBottom">8dp</item>
         <item name="android:textAllCaps">true</item>
         <item name="android:textColor">@color/colorTitles</item>
         <item name="android:textSize">15sp</item>
         <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="SearchStyle">
+        <item name="android:background">@drawable/bg_search</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:paddingStart">@dimen/space_big</item>
+        <item name="android:paddingEnd">@dimen/space_huge</item>
+        <item name="android:textColorHint">@color/textColorSecondary</item>
+        <item name="android:hint">@string/hint_search_query</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@android:color/black</item>
     </style>
 
     <style name="movie_detail_name">
@@ -42,17 +52,6 @@
         <item name="android:textColor">@color/colorTitles</item>
         <item name="android:textSize">16sp</item>
         <item name="android:textStyle">normal</item>
-    </style>
-
-    <style name="SearchStyle">
-        <item name="android:background">@drawable/bg_search</item>
-        <item name="android:maxLines">1</item>
-        <item name="android:paddingStart">@dimen/space_big</item>
-        <item name="android:paddingEnd">@dimen/space_huge</item>
-        <item name="android:textColorHint">@color/textColorSecondary</item>
-        <item name="android:hint">@string/hint_search_query</item>
-        <item name="android:textSize">14sp</item>
-        <item name="android:textColor">@android:color/black</item>
     </style>
 
     <style name="category_head">

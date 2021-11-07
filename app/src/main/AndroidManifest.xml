@@ -13,6 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name="com.petmovie.BottomSheetActivity"
+            android:exported="true" />
+        <activity
             android:name="com.petmovie.MainActivity"
             android:windowSoftInputMode="adjustResize">
             <intent-filter>
